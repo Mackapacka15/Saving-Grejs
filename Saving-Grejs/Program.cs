@@ -9,25 +9,34 @@ namespace Saving_Grejs
     {
         static void Main(string[] args)
         {
-            string heroString = File.ReadAllText("Save.json");
-            List<Hero> heroes = new List<Hero>();
-            Console.WriteLine("Do you want to load progress?");
-            string svar = Console.ReadLine();
-            svar = svar.ToLower();
-            if (svar == "yes")
-            {
-                heroes = JsonSerializer.Deserialize<List<Hero>>(heroString);
-            }
+
+            List<Hero> heroes = Load();
+            Hero h = new Hero();
+            heroes.Add(h);
+
+
+
             Save(heroes);
-
-
-
             Console.ReadLine();
         }
         static void Save(List<Hero> h)
         {
             string json = JsonSerializer.Serialize<List<Hero>>(h);
             File.WriteAllText(@"Save.json", json);
+        }
+        static List<Hero> Load()
+        {
+            List<Hero> heroes = new List<Hero>();
+            string heroString = File.ReadAllText("Save.json");
+            Console.WriteLine("Do you want to load progress?");
+            string svar = Console.ReadLine();
+            svar = svar.ToLower();
+            if (svar == "yes")
+            {
+                heroes = JsonSerializer.Deserialize<List<Hero>>(heroString);
+                return heroes;
+            }
+            return null;
         }
 
     }

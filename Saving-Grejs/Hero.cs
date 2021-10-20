@@ -15,10 +15,23 @@ namespace Saving_Grejs
             name = Console.ReadLine();
             Console.WriteLine("DMG?");
             svar = Console.ReadLine();
-            dmg = int.Parse(svar);
+            dmg = IntMaker(svar);
             Console.WriteLine("HP?");
             svar = Console.ReadLine();
-            hp = int.Parse(svar);
+            hp = IntMaker(svar);
+
+        }
+        private int IntMaker(string svar)
+        {
+            int temp;
+            bool correct = int.TryParse(svar, out temp);
+            if (!correct)
+            {
+                Console.WriteLine("That was not a number");
+                return 10;
+            }
+
+            return temp;
 
         }
 
